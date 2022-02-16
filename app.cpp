@@ -61,7 +61,7 @@ string validNum(char varname)
     {
         cout << varname << " = ";
         cin >> value;
-        for (int i = 0; i < value.size(); i++)
+        for (size_t i = 0; i < value.size(); i++)
         {
             if (!isdigit(value[i]) && value[i] != '.' && value[i] != '-')
             {
