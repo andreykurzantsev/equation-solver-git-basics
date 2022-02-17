@@ -7,6 +7,7 @@
 using namespace std;
 
 string validNum(char varname);
+double *useFile(string filepath);
 void solveEquation(double a, double b, double c);
 void printDoneEquation(double a, double b, double c);
 
@@ -23,35 +24,11 @@ int main(int argc, char *argv[])
     }
     else if (argc == 2)
     {
-        string inlines, checkformat;
-        stringstream strbuf;
-        fstream inputfile;
-        inputfile.open(argv[1], ios::in);
-        if (!inputfile.is_open())
-        {
-            cout << "File " << argv[1] << " does not exist" << endl;
-        }
-        else
-        {
-            getline(inputfile, inlines);
-            strbuf.str(inlines);
-
-            inputfile >> checkformat;
-            if (checkformat != "")
-            {
-                cout << "Invalid file format" << endl;
-            }
-            double coefs[3];
-            for (int i = 0; i < 3; i++)
-            {
-                string k;
-                strbuf >> k;
-                coefs[i] = stod(k);
-            }
-            a = coefs[0];
-            b = coefs[1];
-            c = coefs[2];
-        }
+        string file = argv[1];
+        double *pointforarr = useFile(file);
+        a = pointforarr[0];
+        b = pointforarr[1];
+        c = pointforarr[2];
     }
     else
     {
@@ -85,6 +62,45 @@ string validNum(char varname)
         }
     }
     return value;
+}
+
+double *useFile(string filepath)
+{
+
+    static double coefs[3];
+    string inlines, checkformat;
+    stringstream strbuf;
+
+    fstream inputfile;
+    inputfile.open(filepath, ios::in);
+
+    if (!inputfile.is_open())
+    {
+        throw logic_error(("File " + filepath + " doesn't exist").c_str());
+    }
+    else
+    {
+        getline(inputfile, inlines);
+        strbuf.str(inlines);
+
+        inputfile >> checkformat;
+        if (checkformat != "")
+        {
+            throw logic_error("Invalid file format");
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            string k;
+            strbuf >> k;
+            if (i == 0 && k == "0")
+            {
+                throw logic_error("Error. a cannot be 0");
+            }
+            coefs[i] = stod(k);
+        }
+    }
+
+    return coefs;
 }
 
 void solveEquation(double a, double b, double c)
