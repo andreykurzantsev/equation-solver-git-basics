@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <fstream>
+#include <sstream>
 #include <cmath>
 using namespace std;
 
@@ -44,6 +46,25 @@ int main(int argc, char *argv[])
     }
     else if (argc == 2)
     {
+        string inlines, checkformat;
+        stringstream strbuf;
+        fstream inputfile;
+        inputfile.open(argv[1], ios::in);
+        if (!inputfile.is_open())
+        {
+            cout << "File " << argv[1] << " does not exist" << endl;
+        }
+        else
+        {
+            getline(inputfile, inlines);
+            strbuf << inlines;
+
+            inputfile >> checkformat;
+            if (checkformat != "")
+            {
+                cout << "Invalid file format" << endl;
+            }
+        }
     }
     else
     {
