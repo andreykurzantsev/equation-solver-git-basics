@@ -50,6 +50,15 @@ string validNum(char varname)
         cin >> value;
         for (size_t i = 0; i < value.size(); i++)
         {
+            if (varname == 'a' && value[i] == '0')
+            {
+                cout << "Error. a cannot be 0" << endl;
+                break;
+            }
+            else
+            {
+                flag = false;
+            }
             if (!isdigit(value[i]) && value[i] != '.' && value[i] != '-')
             {
                 cout << "Error. Expected a valid real number, got invalid instead" << endl;
