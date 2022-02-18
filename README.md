@@ -15,7 +15,7 @@ The program is able to solve quadratic equations of any complexity.
 >g++ app.cpp
 >./a.exe
 ```
-* To use the non-interactive mode, you must also compile the code, and then specify the path to the file with coefficients as a command line argument. The file must have a .txt extension. The contents of the file with coefficients should look like a\sb\sc\n, where '\s' is a space and '\n' is a newline. If you fill out the file differently, you will receive an error message. You can use my file: coefs.txt or create your own.
+* To use the non-interactive mode, you must also compile the code, and then specify the path to the file with coefficients as a command line argument. The file must have a .txt extension. The contents of the file with coefficients should look like 2\s1\s-3\n, where '\s' is a space and '\n' is a newline. You can use floating point numbers and negative values as coefficients. The dot '.' must be used as a separator. If you fill out the file differently, you will receive an error message. You can use my file: coefs.txt or create your own.
 ### For example: 
 ```
 >g++ app.cpp
