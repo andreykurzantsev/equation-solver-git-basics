@@ -14,7 +14,7 @@ void printDoneEquation(double a, double b, double c);
 int main(int argc, char *argv[])
 {
     double a, b, c;
-    if (argc == 1)
+    if (argc < 2)
     {
         a = stod(validNum('a'));
         b = stod(validNum('b'));
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        cout << "Error" << endl;
+        throw logic_error("Something is wrong with the amount of arguments");
     }
     printDoneEquation(a, b, c);
     solveEquation(a, b, c);
