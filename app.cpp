@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <cmath>
+#include <stdexcept>
 using namespace std;
 
 string validNum(char varname);
@@ -55,11 +56,7 @@ string validNum(char varname)
                 cout << "Error. a cannot be 0" << endl;
                 break;
             }
-            else
-            {
-                flag = false;
-            }
-            if (!isdigit(value[i]) && value[i] != '.' && value[i] != '-')
+            else if (!isdigit(value[i]) && value[i] != '.' && value[i] != '-')
             {
                 cout << "Error. Expected a valid real number, got invalid instead" << endl;
                 break;
@@ -97,15 +94,29 @@ double *useFile(string filepath)
         {
             throw logic_error("Invalid file format");
         }
+        double num;
         for (int i = 0; i < 3; i++)
         {
-            string k;
-            strbuf >> k;
-            if (i == 0 && k == "0")
+            strbuf >> num;
+            if (!strbuf.bad())
             {
-                throw logic_error("Error. a cannot be 0");
+                if (i == 0 && num == 0)
+                {
+                    throw logic_error("Error. a cannot be 0");
+                }
             }
-            coefs[i] = stod(k);
+            if (strbuf.bad())
+            {
+                throw std::logic_error("Invalid file format");
+            }
+            else
+            {
+                coefs[i] = num;
+            }
+        }
+        if (!strbuf.eof())
+        {
+            throw std::logic_error("Invalid file format");
         }
     }
 
