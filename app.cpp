@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <iomanip>
 #include <fstream>
 #include <sstream>
 #include <cmath>
@@ -15,8 +14,6 @@ void printDoneEquation(double a, double b, double c);
 int main(int argc, char *argv[])
 {
     double a, b, c;
-    cout << fixed << showpoint;
-    cout << setprecision(3);
     if (argc == 1)
     {
         a = stod(validNum('a'));
@@ -90,22 +87,41 @@ double *useFile(string filepath)
         strbuf.str(inlines);
 
         inputfile >> checkformat;
+
         if (checkformat != "")
         {
             throw logic_error("Invalid file format");
         }
+
         double num;
+        int spacecount = 0;
+
+        for (int j = 0; j < inlines.size(); j++)
+        {
+            char s = inlines[j];
+            if (s == ' ')
+            {
+                spacecount++;
+            }
+        }
+
+        if (spacecount != 2)
+        {
+            throw std::logic_error("Invalid file format");
+        }
+
         for (int i = 0; i < 3; i++)
         {
+
             strbuf >> num;
-            if (!strbuf.bad())
+            if (!strbuf.fail())
             {
-                if (i == 0 && num == 0)
+                if (i == 0 && num == 0.0)
                 {
                     throw logic_error("Error. a cannot be 0");
                 }
             }
-            if (strbuf.bad())
+            if (strbuf.fail())
             {
                 throw std::logic_error("Invalid file format");
             }
@@ -114,9 +130,13 @@ double *useFile(string filepath)
                 coefs[i] = num;
             }
         }
-        if (!strbuf.eof())
+        if (!strbuf.fail())
         {
-            throw std::logic_error("Invalid file format");
+            strbuf >> num;
+            if (!strbuf.fail())
+            {
+                throw std::logic_error("Invalid file format");
+            }
         }
     }
 
