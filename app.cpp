@@ -9,6 +9,7 @@ using namespace std;
 string validNum(char varname);
 double *useFile(string filepath);
 void solveEquation(double a, double b, double c);
+double zeroChecker(double arg);
 void printDoneEquation(double a, double b, double c);
 
 int main(int argc, char *argv[])
@@ -155,17 +156,29 @@ void solveEquation(double a, double b, double c)
     else if (discriminant == 0)
     {
         x1 = -b / 2 * a;
+        x1 = zeroChecker(x1);
         cout << "There are 1 root" << endl;
         cout << "x = " << x1;
     }
     else if (discriminant > 0)
     {
         x1 = (-b - sqrt(discriminant)) / (2 * a);
+        x1 = zeroChecker(x1);
         x2 = (-b + sqrt(discriminant)) / (2 * a);
+        x2 = zeroChecker(x2);
         cout << "There are 2 roots" << endl;
         cout << "x1 = " << x1 << endl;
         cout << "x2 = " << x2 << endl;
     }
+}
+
+double zeroChecker(double arg)
+{
+    if (arg == -0)
+    {
+        arg = 0;
+    }
+    return arg;
 }
 
 void printDoneEquation(double a, double b, double c)
