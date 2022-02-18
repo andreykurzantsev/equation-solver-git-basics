@@ -96,7 +96,7 @@ double *useFile(string filepath)
         double num;
         int spacecount = 0;
 
-        for (int j = 0; j < inlines.size(); j++)
+        for (size_t j = 0; j < inlines.size(); j++)
         {
             char s = inlines[j];
             if (s == ' ')
@@ -107,7 +107,7 @@ double *useFile(string filepath)
 
         if (spacecount != 2)
         {
-            throw std::logic_error("Invalid file format");
+            throw logic_error("Invalid file format");
         }
 
         for (int i = 0; i < 3; i++)
@@ -123,7 +123,7 @@ double *useFile(string filepath)
             }
             if (strbuf.fail())
             {
-                throw std::logic_error("Invalid file format");
+                throw logic_error("Invalid file format");
             }
             else
             {
@@ -135,7 +135,7 @@ double *useFile(string filepath)
             strbuf >> num;
             if (!strbuf.fail())
             {
-                throw std::logic_error("Invalid file format");
+                throw logic_error("Invalid file format");
             }
         }
     }
