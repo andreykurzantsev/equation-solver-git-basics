@@ -2,13 +2,13 @@
  This is a console application for solving quadratic equations written in C++
 
 ## Description 
-***
+
 This program has 2 modes of operation:
 + Interactive
 + Non-Interactive
 The program is able to solve quadratic equations of any complexity.
 ## Compilation and using
-***
+
 * To run the program interactively, compile the app.cpp file. And run the received .exe file.
 ### For example: 
 ```
@@ -22,7 +22,7 @@ The program is able to solve quadratic equations of any complexity.
 >./a.exe C:\directory\projectspace\coefs.txt
 ```
 #### Enjoy using
-
-## Revert commit
 ***
+## Revert commit
+
 + [Link for it](https://github.com/andreykurzantsev/equation-solver-git-basics/commit/2e5201597d000264e53d933f1b4756bc44920743)
